@@ -1,14 +1,7 @@
 var bio = {
 	"name": "Nicholas Ratliff",
 	"role": "Front End Application Developer",
-	"contacts": [
-            {name:"mobile",value:"3145205145"},
-            {name:"email", value: "1337.geek@gmail.com"},
-            {name:"github", value: "phix.github.io"},
-            {name:"twitter", value: "@nicholasratliff"},
-            {name:"location", value: "St Louis MO"}
-            ]
-    ,
+	"contacts": {"mobile": "3145205145", "email": "1337.geek@gmail.com", "github": "phix.github.io", "twitter": "@nicholasratliff", "location": "St Louis Missouri"},
     "welcomeMessage": "Welcome!",
     "skills": ["VBA", "Classic ASP", "VBScript", "Batch", "C#", "Coldfusion", "Java", "IIS", "Websphere"],
     "biopic": './images/my_picture.jpg'
@@ -20,20 +13,20 @@ bio.display = function(){
 	var bRole = HTMLheaderRole.replace("%data%", bio.role);
 	var bPic = HTMLbioPic.replace("%data%", bio.biopic);
 	var bMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);	
-	// var bContactMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-	// var bContactEmail = HTMLemail.replace("%data%", bio.contacts.email);
-	// var bGitHub = HTMLgithub.replace("%data%", bio.contacts.github);
-	// var bTwitter = HTMLtwitter.replace("%data%", bio.contacts.github);
-	// var bLocation = HTMLlocation.replace("%data%", bio.contacts.location);
 	var topContacts = $("#topContacts");
 	var footerContacts = $("#footerContacts");
+	var bContactMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+	var bContactEmail = HTMLemail.replace("%data%", bio.contacts.email);
+	var bGitHub = HTMLgithub.replace("%data%", bio.contacts.github);
+	var bTwitter = HTMLtwitter.replace("%data%", bio.contacts.github);
+	var bLocation = HTMLlocation.replace("%data%", bio.contacts.location);
 
 	$("#header").prepend(bRole).prepend(bName);
-	 
-	$(bio.contacts).each(function(index) {
-		topContacts.append(HTMLcontactGeneric.replace("%contact%",this.name).replace("%data%",this.value));
-		footerContacts.append(HTMLcontactGeneric.replace("%contact%",this.name).replace("%data%",this.value));
-	});
+	
+	for(x in bio.contacts) {
+		topContacts.append(HTMLcontactGeneric.replace("%contact%",x).replace("%data%",bio.contacts[x]));
+		footerContacts.append(HTMLcontactGeneric.replace("%contact%",x).replace("%data%",bio.contacts[x]));
+	};	
 
 	$("#header").append(bPic).append(bMsg).append(HTMLskillsStart);
 	 for(x in bio.skills) {
@@ -52,6 +45,13 @@ var work = {
 			"location": "Earth City, Missouri",
 			"datesWorked": "Nov 2013 - Current",
 			"description": "Application Developer for ATO and CARE Organizations"
+		},
+		{
+			"employer": "AT&T",
+			"title": "Sr Specialist Application Developer",
+			"location": "Earth City, Missouri",
+			"datesWorked": "Nov 2013 - Current",
+			"description": "Application Developer for ATO and CARE Organizations"
 		}]
 };
 
@@ -62,7 +62,7 @@ work.display = function(){
 	var wWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[0].location);
 	var wDatesWorked = HTMLworkDates.replace("%data%", work.jobs[0].datesWorked);
 	var wWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[0].description);
-	// $("#workExperience").append(HTMLworkStart).append(wEmployer + " - " + wWorkTitle).append(wDatesWorked).append(wWorkLocation).append(wWorkDescription);
+
 	$("#workExperience").append(HTMLworkStart);
 	$(".work-entry:last").append(wEmployer + wWorkTitle).append(wDatesWorked).append(wWorkLocation).append(wWorkDescription);
 };
@@ -90,12 +90,21 @@ projects.display();
 
 var education = {
 	"schools": [{
-		"name": "Fort Zumwalt North Highschool",
-		"location": "63303",
-		"degree": "NA",
-		"majors": "Programming",
-		"dates": "1996-2000"
-	}],
+			"name": "Fort Zumwalt North Highschool",
+			"location": "Ofallon Missouri",
+			"degree": "NA",
+			"majors": "Programming",
+			"dates": "1996-2000"
+		}, {
+			"name": "Example School",
+			"location": "St Charles Missouri",
+			"degree": "NA",
+			"majors": "NA",
+			"dates": "2000-2004"
+		}
+
+
+	],
 	"onlineCourses": [{
 		"title": "NA",
 		"school": "NA",
