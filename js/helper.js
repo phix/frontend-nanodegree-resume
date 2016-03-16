@@ -132,7 +132,7 @@ function initializeMap() {
     // the locations array. Note that forEach is used for array iteration
     // as described in the Udacity FEND Style Guide: 
     // https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html#for-in-loop
-    education.schools.forEach(function(school){
+    education.schools.forEach(function(school){      
       locations.push(school.location);
     });
 
@@ -210,7 +210,7 @@ function initializeMap() {
 
     // Iterates through the array of locations, creates a search object for each location
       locations.forEach(function(place){
-      // the search request object
+      // the search request object      
       var request = {
         query: place
       };
@@ -245,4 +245,4 @@ window.addEventListener('load', initializeMap);
 window.addEventListener('resize', function(e) {
   //Make sure the map bounds get updated on page resize
   map.fitBounds(mapBounds);
-//});
+});
