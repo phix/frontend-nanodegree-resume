@@ -1,3 +1,5 @@
+"use strict";
+
 var bio = {
 	"name": "Nicholas Ratliff",
 	"role": "Front End Application Developer",
@@ -23,13 +25,13 @@ bio.display = function(){
 
 	$("#header").prepend(bRole).prepend(bName);
 	
-	for(x in bio.contacts) {
+	for(var x in bio.contacts) {
 		topContacts.append(HTMLcontactGeneric.replace("%contact%",x).replace("%data%",bio.contacts[x]));
 		footerContacts.append(HTMLcontactGeneric.replace("%contact%",x).replace("%data%",bio.contacts[x]));
 	};	
 
 	$("#header").append(bPic).append(bMsg).append(HTMLskillsStart);
-	 for(x in bio.skills) {
+	 for(var x in bio.skills) {
 	 	var bSkill = HTMLskills.replace("%data%",bio.skills[x])
 	 	$("#skills").append(bSkill);
 	};	
@@ -68,7 +70,7 @@ education.display = function(){
 
 	if(education.schools.length > 0){		
 		$("#education").append(HTMLschoolStart)
-		for(x in education.schools) {
+		for(var x in education.schools) {
 			var eName = HTMLschoolName.replace("%data%",education.schools[x].name);
 			var eLoc = HTMLschoolLocation.replace("%data%",education.schools[x].location);
 			var eDegree = HTMLschoolDegree.replace("%data%",education.schools[x].degree);
@@ -79,7 +81,7 @@ education.display = function(){
 	}
 
 	if(education.onlineCourses.length > 0){
-		for(x in education.onlineCourses) {
+		for(var x in education.onlineCourses) {
 			var oTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[x].title);
 			var oSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[x].school);
 			var oDate = HTMLonlineDates.replace("%data%",education.onlineCourses[x].date);
@@ -88,6 +90,7 @@ education.display = function(){
 		};
 	}	 
 };
+
 education.display();
 
 var work = {
@@ -140,8 +143,6 @@ projects.display = function(){
 };
 
 projects.display();
-
-
 
 $("#mapDiv").append(googleMap);
 
