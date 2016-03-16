@@ -2,9 +2,9 @@ var bio = {
 	"name": "Nicholas Ratliff",
 	"role": "Front End Application Developer",
 	"contacts": {"mobile": "3145205145", "email": "1337.geek@gmail.com", "github": "phix.github.io", "twitter": "@nicholasratliff", "location": "St Louis Missouri"},
-    "welcomeMessage": "Welcome!",
-    "skills": ["VBA", "Classic ASP", "VBScript", "Batch", "C#", "Coldfusion", "Java", "IIS", "Websphere"],
-    "biopic": './images/my_picture.jpg'
+	"welcomeMessage": "Welcome!",
+        "skills": ["VBA", "Classic ASP", "VBScript", "Batch", "C#", "Coldfusion", "Java", "IIS", "Websphere"],
+        "biopic": './images/my_picture.jpg'
 };
 
 bio.display = function(){
