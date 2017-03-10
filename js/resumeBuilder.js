@@ -10,7 +10,6 @@ var bio = {
 };
 
 bio.display = function(){
-	console.log(bio.name);
 	var bName = HTMLheaderName.replace("%data%", bio.name);
 	var bRole = HTMLheaderRole.replace("%data%", bio.role);
 	var bPic = HTMLbioPic.replace("%data%", bio.biopic);
@@ -28,13 +27,13 @@ bio.display = function(){
 	for(var x in bio.contacts) {
 		topContacts.append(HTMLcontactGeneric.replace("%contact%",x).replace("%data%",bio.contacts[x]));
 		footerContacts.append(HTMLcontactGeneric.replace("%contact%",x).replace("%data%",bio.contacts[x]));
-	};	
+	}
 
 	$("#header").append(bPic).append(bMsg).append(HTMLskillsStart);
 	 for(var x in bio.skills) {
-	 	var bSkill = HTMLskills.replace("%data%",bio.skills[x])
+	 	var bSkill = HTMLskills.replace("%data%",bio.skills[x]);
 	 	$("#skills").append(bSkill);
-	};	
+	}	
 };
 
 bio.display();
@@ -64,12 +63,12 @@ var education = {
 		"date": "NA",
 		"url": "NA"
 	}]
-}
+};
 
 education.display = function(){
 
 	if(education.schools.length > 0){		
-		$("#education").append(HTMLschoolStart)
+		$("#education").append(HTMLschoolStart);
 		for(var x in education.schools) {
 			var eName = HTMLschoolName.replace("%data%",education.schools[x].name);
 			var eLoc = HTMLschoolLocation.replace("%data%",education.schools[x].location);
@@ -77,7 +76,7 @@ education.display = function(){
 			var eMajor = HTMLschoolMajor.replace("%data%",education.schools[x].majors);
 			var eDates = HTMLschoolDates.replace("%data%",education.schools[x].dates);				
 			$(".education-entry:last").append(eName).append(eLoc).append(eDates).append(eMajor);		 	
-		};
+		}
 	}
 
 	if(education.onlineCourses.length > 0){
@@ -86,8 +85,8 @@ education.display = function(){
 			var oSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[x].school);
 			var oDate = HTMLonlineDates.replace("%data%",education.onlineCourses[x].date);
 			var oUrl = HTMLonlineURL.replace("%data%",education.onlineCourses[x].url);
-			$(".education-entry:last").append(HTMLonlineClasses).append(oTitle + " - " + oSchool).append(oDate).append(oUrl)	
-		};
+			$(".education-entry:last").append(HTMLonlineClasses).append(oTitle + " - " + oSchool).append(oDate).append(oUrl);	
+		}
 	}	 
 };
 
@@ -145,4 +144,3 @@ projects.display = function(){
 projects.display();
 
 $("#mapDiv").append(googleMap);
-
