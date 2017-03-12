@@ -30,9 +30,9 @@ bio.display = function(){
 	}
 
 	$("#header").append(bPic).append(bMsg).append(HTMLskillsStart);
-	 for(var x in bio.skills) {
-	 	var bSkill = HTMLskills.replace("%data%",bio.skills[x]);
-	 	$("#skills").append(bSkill);
+	for (var i = 0; i < bio.skills.length; i++) {
+	    formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+	    $("#skills").append(formattedSkills);
 	}	
 };
 
@@ -43,14 +43,14 @@ var education = {
 			"name": "Fort Zumwalt North Highschool",
 			"location": "Ofallon Missouri",
 			"degree": "NA",
-			"majors": "Programming",
+			"majors": ["Programming"],
 			"dates": "1996-2000",
 			"url" : "www.nowhere.com"
 		}, {
 			"name": "Example School",
 			"location": "St Charles Missouri",
 			"degree": "NA",
-			"majors": "NA",
+			"majors": ["Programming"],
 			"dates": "2000-2004",
 			"url": "www.nowhere.com"
 		}
@@ -66,28 +66,25 @@ var education = {
 };
 
 education.display = function(){
+	education.schools.forEach(function(val, i) {
+	    $('#education').append(HTMLschoolStart);
+	    var formattedName = HTMLschoolName.replace('%data%', education.schools[i].name).replace('#', education.schools[i].url);
+	    var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[i].location);
+	    var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[i].degree);
+	    var formattedMajors = HTMLschoolMajor.replace('%data%', education.schools[i].majors);
+	    var formattedDates = HTMLschoolDates.replace('%data%', education.schools[i].dates);
+	    var formattedNameDegree = formattedName + formattedDegree;
+	    $('.education-entry:last').append(formattedNameDegree).append(formattedDates).append(formattedLocation).append(formattedMajors);
+	});
 
-	if(education.schools.length > 0){		
-		$("#education").append(HTMLschoolStart);
-		for(var x in education.schools) {
-			var eName = HTMLschoolName.replace("%data%",education.schools[x].name);
-			var eLoc = HTMLschoolLocation.replace("%data%",education.schools[x].location);
-			var eDegree = HTMLschoolDegree.replace("%data%",education.schools[x].degree);
-			var eMajor = HTMLschoolMajor.replace("%data%",education.schools[x].majors);
-			var eDates = HTMLschoolDates.replace("%data%",education.schools[x].dates);				
-			$(".education-entry:last").append(eName).append(eLoc).append(eDates).append(eMajor);		 	
-		}
-	}
-
-	if(education.onlineCourses.length > 0){
-		for(var x in education.onlineCourses) {
-			var oTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[x].title);
-			var oSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[x].school);
-			var oDate = HTMLonlineDates.replace("%data%",education.onlineCourses[x].date);
-			var oUrl = HTMLonlineURL.replace("%data%",education.onlineCourses[x].url);
-			$(".education-entry:last").append(HTMLonlineClasses).append(oTitle + " - " + oSchool).append(oDate).append(oUrl);	
-		}
-	}	 
+	education.onlineCourses.forEach(function(val, i) {
+    $('#education').append(HTMLschoolStart);
+ 			var oTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[i].title);
+			var oSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[i].school);
+			var oDate = HTMLonlineDates.replace("%data%",education.onlineCourses[i].date);
+			var oUrl = HTMLonlineURL.replace("%data%",education.onlineCourses[i].url);
+	    $('.education-entry:last').append(HTMLonlineClasses).append(oTitle + " - " + oSchool).append(oDate).append(oUrl);	
+	});	 
 };
 
 education.display();
@@ -125,10 +122,12 @@ work.display = function(){
 work.display();
 
 var projects = {
-	"title": "Example Project",
-	"dates": "2014-2015",
-	"description": "test description",
-	"images": ["http://vignette4.wikia.nocookie.net/starwars/images/6/63/Sabine_Starbird.svg/revision/latest?cb=20141030003059", "http://vignette1.wikia.nocookie.net/starwars/images/7/71/Redstarbird.svg/revision/latest?cb=20080228205026"]
+    "projects":[{
+          "title": "Example Project",
+          "dates": "2014-2015",
+          "description": "test description",
+"images": ["http://vignette4.wikia.nocookie.net/starwars/images/6/63/Sabine_Starbird.svg/revision/latest?cb=20141030003059", "http://vignette1.wikia.nocookie.net/starwars/images/7/71/Redstarbird.svg/revision/latest?cb=20080228205026"]
+    }]
 };
 
 projects.display = function(){
