@@ -31,7 +31,7 @@ bio.display = function(){
 
 	$("#header").append(bPic).append(bMsg).append(HTMLskillsStart);
 	for (var i = 0; i < bio.skills.length; i++) {
-	    formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+	    var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
 	    $("#skills").append(formattedSkills);
 	}	
 };
@@ -109,14 +109,27 @@ var work = {
 
 
 work.display = function(){
-	var wEmployer = HTMLworkEmployer.replace("%data%", work.jobs[0].employer);
-	var wWorkTitle = HTMLworkTitle.replace("%data%", work.jobs[0].title);
-	var wWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[0].location);
-	var wDatesWorked = HTMLworkDates.replace("%data%", work.jobs[0].dates);
-	var wWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[0].description);
+
+	work.jobs.forEach(function(val, i) {
+
+	var wEmployer = HTMLworkEmployer.replace("%data%", work.jobs[i].employer);
+	var wWorkTitle = HTMLworkTitle.replace("%data%", work.jobs[i].title);
+	var wWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[i].location);
+	var wDatesWorked = HTMLworkDates.replace("%data%", work.jobs[i].dates);
+	var wWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[i].description);
 
 	$("#workExperience").append(HTMLworkStart);
 	$(".work-entry:last").append(wEmployer + wWorkTitle).append(wDatesWorked).append(wWorkLocation).append(wWorkDescription);
+	    // $('#education').append(HTMLschoolStart);
+	    // var formattedName = HTMLschoolName.replace('%data%', education.schools[i].name).replace('#', education.schools[i].url);
+	    // var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[i].location);
+	    // var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[i].degree);
+	    // var formattedMajors = HTMLschoolMajor.replace('%data%', education.schools[i].majors);
+	    // var formattedDates = HTMLschoolDates.replace('%data%', education.schools[i].dates);
+	    // var formattedNameDegree = formattedName + formattedDegree;
+	    // $('.education-entry:last').append(formattedNameDegree).append(formattedDates).append(formattedLocation).append(formattedMajors);
+	});
+
 };
 
 work.display();
@@ -126,18 +139,26 @@ var projects = {
           "title": "Example Project",
           "dates": "2014-2015",
           "description": "test description",
-"images": ["http://vignette4.wikia.nocookie.net/starwars/images/6/63/Sabine_Starbird.svg/revision/latest?cb=20141030003059", "http://vignette1.wikia.nocookie.net/starwars/images/7/71/Redstarbird.svg/revision/latest?cb=20080228205026"]
+		  "images": ["http://vignette4.wikia.nocookie.net/starwars/images/6/63/Sabine_Starbird.svg/revision/latest?cb=20141030003059"]
     }]
 };
 
 projects.display = function(){
-	var pTitle = HTMLprojectTitle.replace("%data%", projects.title);
-	var pDates = HTMLprojectDates.replace("%data%", projects.dates);
-	var pDescription = HTMLprojectDescription.replace("%data%", projects.description);
-	var pImage1 = HTMLprojectImage.replace("%data%", projects.images[0]);
-	var pImage2 = HTMLprojectImage.replace("%data%", projects.images[1]);
-	$("#projects").append(HTMLprojectStart);
-	$(".project-entry:last").append(pTitle).append(pDates).append(pDescription).append(pImage1).append(pImage2);
+	projects.projects.forEach(function(val, i) {
+ 		//var oTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[i].title);
+	   	var pTitle = HTMLprojectTitle.replace("%data%", projects.projects[i]);
+		var pDates = HTMLprojectDates.replace("%data%", projects.projects[i].dates);
+		var pDescription = HTMLprojectDescription.replace("%data%", projects.projects[i].description);
+		$("#projects").append(HTMLprojectStart);
+		$(".project-entry:last").append(pTitle).append(pDates).append(pDescription)
+			projects.projects[i].images.forEach(function(val, x) {
+				var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[i].images[x]);
+				$(".project-entry:last").append(formattedProjectImage);
+			});
+		
+	});	 
+
+	
 };
 
 projects.display();
