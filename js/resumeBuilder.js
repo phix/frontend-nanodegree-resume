@@ -128,7 +128,7 @@ var projects = {
 	"title": "Example Project",
 	"dates": "2014-2015",
 	"description": "test description",
-	"images": ["image1.jpg", "image2.jpg"]
+	"images": ["http://vignette4.wikia.nocookie.net/starwars/images/6/63/Sabine_Starbird.svg/revision/latest?cb=20141030003059", "http://vignette1.wikia.nocookie.net/starwars/images/7/71/Redstarbird.svg/revision/latest?cb=20080228205026"]
 };
 
 projects.display = function(){
