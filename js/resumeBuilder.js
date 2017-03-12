@@ -10,7 +10,6 @@ var bio = {
 };
 
 bio.display = function(){
-	console.log(bio.name);
 	var bName = HTMLheaderName.replace("%data%", bio.name);
 	var bRole = HTMLheaderRole.replace("%data%", bio.role);
 	var bPic = HTMLbioPic.replace("%data%", bio.biopic);
@@ -28,13 +27,13 @@ bio.display = function(){
 	for(var x in bio.contacts) {
 		topContacts.append(HTMLcontactGeneric.replace("%contact%",x).replace("%data%",bio.contacts[x]));
 		footerContacts.append(HTMLcontactGeneric.replace("%contact%",x).replace("%data%",bio.contacts[x]));
-	};	
+	}
 
 	$("#header").append(bPic).append(bMsg).append(HTMLskillsStart);
-	 for(var x in bio.skills) {
-	 	var bSkill = HTMLskills.replace("%data%",bio.skills[x])
-	 	$("#skills").append(bSkill);
-	};	
+	for (var i = 0; i < bio.skills.length; i++) {
+	    var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+	    $("#skills").append(formattedSkills);
+	}	
 };
 
 bio.display();
@@ -44,14 +43,14 @@ var education = {
 			"name": "Fort Zumwalt North Highschool",
 			"location": "Ofallon Missouri",
 			"degree": "NA",
-			"majors": "Programming",
+			"majors": ["Programming"],
 			"dates": "1996-2000",
 			"url" : "www.nowhere.com"
 		}, {
 			"name": "Example School",
 			"location": "St Charles Missouri",
 			"degree": "NA",
-			"majors": "NA",
+			"majors": ["Programming"],
 			"dates": "2000-2004",
 			"url": "www.nowhere.com"
 		}
@@ -64,31 +63,28 @@ var education = {
 		"date": "NA",
 		"url": "NA"
 	}]
-}
+};
 
 education.display = function(){
+	education.schools.forEach(function(val, i) {
+	    $('#education').append(HTMLschoolStart);
+	    var formattedName = HTMLschoolName.replace('%data%', education.schools[i].name).replace('#', education.schools[i].url);
+	    var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[i].location);
+	    var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[i].degree);
+	    var formattedMajors = HTMLschoolMajor.replace('%data%', education.schools[i].majors);
+	    var formattedDates = HTMLschoolDates.replace('%data%', education.schools[i].dates);
+	    var formattedNameDegree = formattedName + formattedDegree;
+	    $('.education-entry:last').append(formattedNameDegree).append(formattedDates).append(formattedLocation).append(formattedMajors);
+	});
 
-	if(education.schools.length > 0){		
-		$("#education").append(HTMLschoolStart)
-		for(var x in education.schools) {
-			var eName = HTMLschoolName.replace("%data%",education.schools[x].name);
-			var eLoc = HTMLschoolLocation.replace("%data%",education.schools[x].location);
-			var eDegree = HTMLschoolDegree.replace("%data%",education.schools[x].degree);
-			var eMajor = HTMLschoolMajor.replace("%data%",education.schools[x].majors);
-			var eDates = HTMLschoolDates.replace("%data%",education.schools[x].dates);				
-			$(".education-entry:last").append(eName).append(eLoc).append(eDates).append(eMajor);		 	
-		};
-	}
-
-	if(education.onlineCourses.length > 0){
-		for(var x in education.onlineCourses) {
-			var oTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[x].title);
-			var oSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[x].school);
-			var oDate = HTMLonlineDates.replace("%data%",education.onlineCourses[x].date);
-			var oUrl = HTMLonlineURL.replace("%data%",education.onlineCourses[x].url);
-			$(".education-entry:last").append(HTMLonlineClasses).append(oTitle + " - " + oSchool).append(oDate).append(oUrl)	
-		};
-	}	 
+	education.onlineCourses.forEach(function(val, i) {
+    $('#education').append(HTMLschoolStart);
+ 			var oTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[i].title);
+			var oSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[i].school);
+			var oDate = HTMLonlineDates.replace("%data%",education.onlineCourses[i].date);
+			var oUrl = HTMLonlineURL.replace("%data%",education.onlineCourses[i].url);
+	    $('.education-entry:last').append(HTMLonlineClasses).append(oTitle + " - " + oSchool).append(oDate).append(oUrl);	
+	});	 
 };
 
 education.display();
@@ -113,36 +109,58 @@ var work = {
 
 
 work.display = function(){
-	var wEmployer = HTMLworkEmployer.replace("%data%", work.jobs[0].employer);
-	var wWorkTitle = HTMLworkTitle.replace("%data%", work.jobs[0].title);
-	var wWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[0].location);
-	var wDatesWorked = HTMLworkDates.replace("%data%", work.jobs[0].dates);
-	var wWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[0].description);
+
+	work.jobs.forEach(function(val, i) {
+
+	var wEmployer = HTMLworkEmployer.replace("%data%", work.jobs[i].employer);
+	var wWorkTitle = HTMLworkTitle.replace("%data%", work.jobs[i].title);
+	var wWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[i].location);
+	var wDatesWorked = HTMLworkDates.replace("%data%", work.jobs[i].dates);
+	var wWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[i].description);
 
 	$("#workExperience").append(HTMLworkStart);
 	$(".work-entry:last").append(wEmployer + wWorkTitle).append(wDatesWorked).append(wWorkLocation).append(wWorkDescription);
+	    // $('#education').append(HTMLschoolStart);
+	    // var formattedName = HTMLschoolName.replace('%data%', education.schools[i].name).replace('#', education.schools[i].url);
+	    // var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[i].location);
+	    // var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[i].degree);
+	    // var formattedMajors = HTMLschoolMajor.replace('%data%', education.schools[i].majors);
+	    // var formattedDates = HTMLschoolDates.replace('%data%', education.schools[i].dates);
+	    // var formattedNameDegree = formattedName + formattedDegree;
+	    // $('.education-entry:last').append(formattedNameDegree).append(formattedDates).append(formattedLocation).append(formattedMajors);
+	});
+
 };
 
 work.display();
 
 var projects = {
-	"title": "Example Project",
-	"dates": "2014-2015",
-	"description": "test description",
-"images": ["http://vignette4.wikia.nocookie.net/starwars/images/6/63/Sabine_Starbird.svg/revision/latest?cb=20141030003059", "http://vignette1.wikia.nocookie.net/starwars/images/7/71/Redstarbird.svg/revision/latest?cb=20080228205026"]
+    "projects":[{
+          "title": "Example Project",
+          "dates": "2014-2015",
+          "description": "test description",
+		  "images": ["http://vignette4.wikia.nocookie.net/starwars/images/6/63/Sabine_Starbird.svg/revision/latest?cb=20141030003059"]
+    }]
 };
 
 projects.display = function(){
-	var pTitle = HTMLprojectTitle.replace("%data%", projects.title);
-	var pDates = HTMLprojectDates.replace("%data%", projects.dates);
-	var pDescription = HTMLprojectDescription.replace("%data%", projects.description);
-	var pImage1 = HTMLprojectImage.replace("%data%", projects.images[0]);
-	var pImage2 = HTMLprojectImage.replace("%data%", projects.images[1]);
-	$("#projects").append(HTMLprojectStart);
-	$(".project-entry:last").append(pTitle).append(pDates).append(pDescription).append(pImage1).append(pImage2);
+	projects.projects.forEach(function(val, i) {
+ 		//var oTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[i].title);
+	   	var pTitle = HTMLprojectTitle.replace("%data%", projects.projects[i]);
+		var pDates = HTMLprojectDates.replace("%data%", projects.projects[i].dates);
+		var pDescription = HTMLprojectDescription.replace("%data%", projects.projects[i].description);
+		$("#projects").append(HTMLprojectStart);
+		$(".project-entry:last").append(pTitle).append(pDates).append(pDescription)
+			projects.projects[i].images.forEach(function(val, x) {
+				var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[i].images[x]);
+				$(".project-entry:last").append(formattedProjectImage);
+			});
+		
+	});	 
+
+	
 };
 
 projects.display();
 
 $("#mapDiv").append(googleMap);
-
